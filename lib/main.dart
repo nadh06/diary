@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+import 'utils/notification_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  final InitializationSettings initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
-
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
+  await NotificationHelper.initialize();
   runApp(MyDiaryApp());
 }
 
@@ -29,12 +18,11 @@ class MyDiaryApp extends StatelessWidget {
       title: 'My Diary',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        fontFamily: 'Roboto',
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyMedium: TextStyle(fontSize: 16),
         ),
       ),
-      home: LoginScreen(), // changed from HomeScreen to LoginScreen
+      home: const LoginScreen(),
     );
   }
 }
